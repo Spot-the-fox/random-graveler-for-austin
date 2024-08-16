@@ -7,15 +7,16 @@
 
 #include <stdio.h>  // Input/output library, for displaying text.
 #include <stdlib.h> // Randomness function and seeding.
-
+#include <time.h>
 
 int main(){  //Main function
 	char r0 = 0;   // The number of times the number 0 has been rolled over 231 tries
 	char br0 = 0;  // The highest number pulled this way.
 	int rand_value;
+	srand(time(0)); //seeded for now.
+   for(int j = 0; j<1000000; j++){ // 1 billion rolls of 231d4
+	//setting seed each roll.
 
-for(int j = 0; j<1000000000; j++){ // 1 billion rolls of 231d4
-	srand(j); //setting seed each roll.
 	r0=0;
 	for(int i = 0; i<14; i++){ //rolling 224 out of 231 dice.
 		/*
@@ -28,33 +29,34 @@ for(int j = 0; j<1000000000; j++){ // 1 billion rolls of 231d4
 			Now, if it's 00, that means that the whole 32 bits is 0. Which is boolean false. So, we say: NOT, and it being false becomes true.
 			Any other number 01, 10, 11 turns from true to false.
 		*/
+	
 		rand_value = rand();
-		if(!(rand_value&0x00000003))r0++;
-		if(!(rand_value&0x0000000c))r0++;
-		if(!(rand_value&0x00000030))r0++;
-		if(!(rand_value&0x000000c0))r0++;
-		if(!(rand_value&0x00000300))r0++;
-		if(!(rand_value&0x00000c00))r0++;
-		if(!(rand_value&0x00003000))r0++;
-		if(!(rand_value&0x0000c000))r0++;
-		if(!(rand_value&0x00030000))r0++;
-		if(!(rand_value&0x000c0000))r0++;
-		if(!(rand_value&0x00300000))r0++;
-		if(!(rand_value&0x00c00000))r0++;
-		if(!(rand_value&0x03000000))r0++;
-		if(!(rand_value&0x0c000000))r0++;
-		if(!(rand_value&0x30000000))r0++;
-		if(!(rand_value&0xc0000000))r0++;
+		(rand_value&0x00000003)? 0:r0++;
+		(rand_value&0x0000000c)? 0:r0++;
+		(rand_value&0x00000030)? 0:r0++;
+		(rand_value&0x000000c0)? 0:r0++;
+		(rand_value&0x00000300)? 0:r0++;
+		(rand_value&0x00000c00)? 0:r0++;
+		(rand_value&0x00003000)? 0:r0++;
+		(rand_value&0x0000c000)? 0:r0++;
+		(rand_value&0x00030000)? 0:r0++;
+		(rand_value&0x000c0000)? 0:r0++;
+		(rand_value&0x00300000)? 0:r0++;
+		(rand_value&0x00c00000)? 0:r0++;
+		(rand_value&0x03000000)? 0:r0++;
+		(rand_value&0x0c000000)? 0:r0++;
+		(rand_value&0x30000000)? 0:r0++;
+		(rand_value&0xc0000000)? 0:r0++;
 	}
 	rand_value = rand();
 
-	if(!(rand_value&0x00000003))r0++; //remaining 7 rolls.
-	if(!(rand_value&0x0000000c))r0++;
-	if(!(rand_value&0x00000030))r0++;
-	if(!(rand_value&0x000000c0))r0++;
-	if(!(rand_value&0x00000300))r0++;
-	if(!(rand_value&0x00000c00))r0++;
-	if(!(rand_value&0x00003000))r0++;
+	(rand_value&0x00000003)? 0:r0++; //remaining 7 rolls.
+	(rand_value&0x0000000c)? 0:r0++;
+	(rand_value&0x00000030)? 0:r0++;
+	(rand_value&0x000000c0)? 0 :r0++;
+	(rand_value&0x00000300)? 0 :r0++;
+	(rand_value&0x00000c00)? 0 :r0++;
+	(rand_value&0x00003000)? 0 :r0++;
 	
 
 	br0 = (r0>br0)?r0:br0; //Records the maximum
